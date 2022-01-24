@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: mnYachtcloud
+    name: yachtcloud
     server:
       port: 8080
       router:
@@ -25,15 +25,6 @@ micronaut:
           secret:
             generator:
               secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"'
-flyway:
-  datasources:
-    default:
-      enabled: true
-      clean-schema: false
-      url: jdbc:postgresql://localhost:5432/yachtcloud_dev
-      driverClassName: org.postgresql.Driver
-      username: illusionist
-      password: 'illusion'
 datasources:
   default:
     url: jdbc:postgresql://localhost:5432/yachtcloud_dev
@@ -43,11 +34,20 @@ datasources:
     schema-generate: NONE
     dialect: POSTGRES
 # micronaut-data-jpa
-#jpa:
-#  default:
-#    packages-to-scan:
-#      - "illusionist.broker.persistence"
-#    properties:
-#      hibernate:
-#        show_sql: false
-#        hbm2ddl.auto: update
+jpa:
+  default:
+    packages-to-scan:
+      - "com.lineocode.yachtcloud"
+    properties:
+      hibernate:
+        show_sql: false
+        hbm2ddl.auto: none
+flyway:
+  datasources:
+    default:
+      enabled: true
+      clean-schema: true
+      url: jdbc:postgresql://localhost:5432/yachtcloud_dev
+      driverClassName: org.postgresql.Driver
+      username: illusionist
+      password: 'illusion'
